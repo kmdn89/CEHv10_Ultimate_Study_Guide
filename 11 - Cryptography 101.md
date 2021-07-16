@@ -171,19 +171,21 @@
 
 - **Known plain-text attack** 
       
-      - Attacker has access to both **plain text** & **cipher-text**.
-      - plain-text scanned for repeatable sequences which is compared to cipher text.
+      - Attacker has access to both **plain text** & **cipher-text**. (like a rainbow table)
+      - He has not yet access to the secret key used. 
       - can be used to  :
-          - reveal further secret information such as secret keys.
-          - or to develop an algorithm which would allow him to decrypt any further messages.
+          - reveal further secret information such as **secret keys**.
+          - or to develop an **algorithm** which would allow him to decrypt any further messages.
       - most effective when they are used against the simplest kinds of ciphers
       - Modern ciphers are generally resistant against purely known-plaintext attacks.
           
 - **Chosen plain-text attack** 
       
+      - Attacker can encrypt the plaintext himself (unlike know-plain-text attack)
       - In **public key cryptography** ,   encryption key is public => so attackers can encrypt any plaintext they choose.
       - attacker encrypts multiple plain-text copies in order to gain the key.
-      - 
+      - attacker can obtain the ciphertexts for arbitrary plaintexts => he can encrypts them himself
+      
 
 
 - **Adaptive chosen plain-text attack** - attacker makes a series of interactive queries choosing subsequent plaintexts based on the information from the previous encryptions; idea is to glean more and more information about the full target cipher text and key
