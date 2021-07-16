@@ -127,16 +127,27 @@
 ![Web Services Architecture](/images/webapp-arch.png)
 
  - **SOAP (Simple Object Access Protocol)**
-   - An XML based protocol that allows application running on a platform to communicate with applications running on a different platform
- - **UDDI**
-   - Universal Description, Discovery, and Integration (UDDI) is a directory service that lists all services available
- - **WSDL**
-   - Web Services Description Language is an XML based language that describes and traces web services
+   - An XML based protocol 
+   - allows application running on a platform to communicate with applications running on a different platform
+   
+ - **UDDI** ( Universal Description, Discovery, and Integration) 
+   - directory service 
+   - **lists** all **available services**
+   
+ - **WSDL** (Web Services Description Language )
+   - XML based language 
+   - describes & **traces web services**
+   
  - **WS-Security**
-   - WS-Security plays an important role in securing the web services. WS is an extension to SOAP and aims at maintaining the integrity and confidentiality of SOAP messages and authenticating user
+   - WS-Security plays an important role in securing the web services. 
+   - extension to SOAP 
+   - aims at maintaining the **integrity** and **confidentiality** of **SOAP messages** and **authenticating user**
 
 #### Web Service Attack
- - Web Services are based on XML protocols such as WSDL for describing the connection points; UDDI for the description and discovery of web services; and SOAP for communication between web services which are vulnerable to various web application threats
+ - Web Services are based on XML protocols such as :
+     - WSDL : for  describing  **connection points**; 
+     - UDDI : for  description and discovery of **web services**; 
+     - SOAP : for  communication **between web services** which are vulnerable to various web application threats
 
 ![Web Service Attack](/images/webapp-serviceattack.png)
 #### Web Services Footprinting 
