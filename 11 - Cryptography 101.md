@@ -189,6 +189,7 @@
    - encryption process  :  available (black box : attacker can only view input (his chosen plaintext) and output (correspondant ciphertext) )
    - cipher-text :          available after encryption process
    - secret key :           Not Known 
+   
    - goal :                 reveal all or a part of the secret encryption key
       
           - Attacker can encrypt the plaintext himself (unlike know-plain-text attack) :
@@ -226,9 +227,17 @@
      - plain text :   Not Known
      - secret key :   Not Known
      - Cipher text :  **Accessible**
-     
+
+
      - goal :   recover as much **plaintext messages** as possible or (preferably) **to guess the secret key**.
-     -
+
+     - 2 methods : 
+                
+                - Attack on 2-Time-Pad : 
+                      - 
+                - Frequency Analysis :
+                      -  based on the study of the frequency of letters or groups of letters in a ciphertext. 
+     
      - gains copies of several encrypted messages with the same algorithm; 
      - statistical analysis is then used to reveal eventually repeating code
      
