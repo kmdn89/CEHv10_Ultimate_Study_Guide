@@ -170,36 +170,84 @@
 ### <u>Cryptography Attacks</u>
 
 - **Known plain-text attack** 
+
+    - plain text : Available
+    - cipher text : Available
+    - secret key  : Not Known
       
-      - Attacker has access to both **plain text** & **cipher-text**. (like a rainbow table)
-      - He has not yet access to the secret key used. 
-      - can be used to  :
-          - reveal further secret information such as **secret keys**.
-          - or to develop an **algorithm** which would allow him to decrypt any further messages.
-      - most effective when they are used against the simplest kinds of ciphers
-      - Modern ciphers are generally resistant against purely known-plaintext attacks.
+          - Attacker has access to both **plain text** & **cipher-text**. (like a rainbow table or database mapping plain/-/cipher texts)
+          - He has not yet access to the **secret key** used. 
+          - can be used to  :
+              - reveal further secret information such as **secret keys**.
+              - or to develop an **algorithm** which would allow him to decrypt any further messages.
+          - most effective when they are used against the simplest kinds of ciphers
+          - Modern ciphers are generally resistant against purely known-plaintext attacks.
           
 - **Chosen plain-text attack** 
+   
+   - plain-text :           available
+   - encryption process  :  available (black box : attacker can only view input (his chosen plaintext) and output (correspondant ciphertext) )
+   - cipher-text :          available after encryption process
+   - secret key :           Not Known 
+   - goal :                 reveal all or a part of the secret encryption key
       
-      - Attacker can encrypt the plaintext himself (unlike know-plain-text attack)
-      - In **public key cryptography** ,   encryption key is public => so attackers can encrypt any plaintext they choose.
-      - attacker encrypts multiple plain-text copies in order to gain the key.
-      - attacker can obtain the ciphertexts for arbitrary plaintexts => he can encrypts them himself
+          - Attacker can encrypt the plaintext himself (unlike know-plain-text attack) :
+                - formalized by allowing the adversary to interact with an encryption oracle, viewed as a black box.(encryption process)
+          - In **public key cryptography** ,   encryption key is public => so attackers can encrypt any plaintext they choose.
+          - attacker encrypts multiple plain-text copies in order to gain the key.
+          - attacker can obtain the ciphertexts for arbitrary plaintexts => he can encrypts them himself
       
 
 
-- **Adaptive chosen plain-text attack** - attacker makes a series of interactive queries choosing subsequent plaintexts based on the information from the previous encryptions; idea is to glean more and more information about the full target cipher text and key
-- **Cipher-text-only attack** - gains copies of several encrypted messages with the same algorithm; statistical analysis is then used to reveal eventually repeating code
+- **Adaptive chosen plain-text attack** 
+
+    -  more detailed kind of chosen-plaintext attack
+    -  Attacker has the capability to choose plaintext for **many times** encryption.
+    -  Instead of using 1 big block of text, 
+            
+           attacker can :
+              - choose the smaller one, 
+              - then, receive its encrypted ciphertext 
+              - and then based on the answer : 
+                  - choose another small block, 
+                  - receive its encrypted ciphertext 
+                  - and so on ....      
+          
+     => allows attacker to investigate the attacked system in much more details.
+
+     - attacker makes a series of interactive queries choosing subsequent plaintexts based on :
+            
+            information from the previous encryptions; 
+     
+     - idea is to glean more and more information about the full target cipher text and key
+     
+- **Cipher-text-only attack**   (also **Known Cipher-text attack**)
+      
+     - plain text :   Not Known
+     - secret key :   Not Known
+     - Cipher text :  **Accessible**
+     
+     - goal :   recover as much **plaintext messages** as possible or (preferably) **to guess the secret key**.
+     -
+     - gains copies of several encrypted messages with the same algorithm; 
+     - statistical analysis is then used to reveal eventually repeating code
+     
+- **Chosen Cipher Attack**
+
+  - Chooses a particular cipher-text message
+  - Attempts to discern the key through comparative analysis
+  - RSA is particularly vulnerable to this
+
 - **Replay attack**
   - Usually performed within context of MITM attack
   - Hacker repeats a portion of cryptographic exchange in hopes of fooling the system to setup a communications channel
   - Doesn't know the actual data - just has to get timing right
-- **Chosen Cipher Attack**
-  - Chooses a particular cipher-text message
-  - Attempts to discern the key through comparative analysis
-  - RSA is particularly vulnerable to this
+  
+
 - **Side-Channel Attack**
   - Monitors environmental factors such as power consumtion, timing and delay
+
+
 - **Tools**
   - Carnivore and Magic Lantern - used by law enforcement for cracking codes
   - L0phtcrack - used mainly against Windows SAM files
