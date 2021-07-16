@@ -73,7 +73,7 @@
 ![Sensitive Data Exposure](/images/webapp-sensitivedata.png)
 
 #### XML External Entity (XXE)
- - Server-side request forgery (SSRF) attack where an application is able to parse XML input from an unreliable source because of the misconfigured XML parser
+ - Server-side request forgery (**SSRF**) attack where an **application is able to parse XML input from an unreliable source** because of the **misconfigured XML parser**
  - Attacker send malicious XML input containing reference to an external entity to the victim web application
  - Allows attackers to access protected files and services
 
@@ -147,7 +147,9 @@
  - Web Services are based on XML protocols such as :
      - WSDL : for  describing  **connection points**; 
      - UDDI : for  description and discovery of **web services**; 
-     - SOAP : for  communication **between web services** which are vulnerable to various web application threats
+     - SOAP : for  communication **between web services** 
+   
+  which are vulnerable to various web application threats.
 
 ![Web Service Attack](/images/webapp-serviceattack.png)
 #### Web Services Footprinting 
