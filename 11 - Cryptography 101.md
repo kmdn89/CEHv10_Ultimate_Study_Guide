@@ -169,11 +169,13 @@
 
 ### <u>Cryptography Attacks</u>
 
-- **Known plain-text attack** - Attacker has access to both **plain text** & **cipher-text**; 
-                              - plain-text scanned for repeatable sequences which is compared to cipher text.
-                              - can be used to  :
-                                  - reveal further secret information such as secret keys.
-                                  - or to develop an algorithm which would allow him to decrypt any further messages
+- **Known plain-text attack** 
+      - Attacker has access to both **plain text** & **cipher-text**.
+      - plain-text scanned for repeatable sequences which is compared to cipher text.
+      - can be used to  :
+          - reveal further secret information such as secret keys.
+          - or to develop an algorithm which would allow him to decrypt any further messages.
+          
 - **Chosen plain-text attack** - attacker encrypts multiple plain-text copies in order to gain the key
 - **Adaptive chosen plain-text attack** - attacker makes a series of interactive queries choosing subsequent plaintexts based on the information from the previous encryptions; idea is to glean more and more information about the full target cipher text and key
 - **Cipher-text-only attack** - gains copies of several encrypted messages with the same algorithm; statistical analysis is then used to reveal eventually repeating code
