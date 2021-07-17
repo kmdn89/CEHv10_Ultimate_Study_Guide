@@ -243,9 +243,17 @@
      
 - **Chosen Cipher Attack**
 
-  - Chooses a particular cipher-text message
-  - Attempts to discern the key through comparative analysis
-  - RSA is particularly vulnerable to this
+  - *Chooses a particular cipher-text message*
+  - Attacker has **capability to make the victim** (who obviously knows the *secret key*) **decrypt any ciphertext** and **send him back the result**. 
+
+  - By analysing the chosen ciphertext and the corresponding received plaintext, 
+      => the intruder tries to **guess the secret key** which has been used by the victim through ***comparative analysis**
+      
+  - Chosen-ciphertext attacks are usually used for **breaking systems with public key encryption**. 
+  - For example, early versions of the **RSA** cipher were vulnerable to such attacks.  
+   
+  - They are used **less often** for attacking systems protected by **symmetric ciphers**. 
+  - Some self-synchronizing **stream ciphers** have been also attacked successfully in that way.
 
 - **Replay attack**
   - Usually performed within context of MITM attack
@@ -254,7 +262,9 @@
   
 
 - **Side-Channel Attack**
-  - Monitors environmental factors such as power consumtion, timing and delay
+  - Monitors environmental factors such as :
+      - power consumtion, 
+      - timing & delay .
 
 
 - **Tools**
