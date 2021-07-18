@@ -158,24 +158,26 @@
         -   This feature is useful because some internet routers will drop a connection if it's idle for too long. 
         -   In a nutshell, the heartbeat protocol works like this:
               
-                The heartbeat message has three parts: 
-                    1- a request for acknowledgement, 
-                    2- a short, randomly-chosen message (in this case, "banana"), 
-                    3- and the number of characters in that message. 
+          The heartbeat message has three parts: 
+              1- a request for acknowledgement, 
+              2- a short, randomly-chosen message (in this case, "banana"), 
+              3- and the number of characters in that message. 
+
+          The server is simply supposed to acknowledge having received the request and parrot back the message : 
+
+              -  The Heartbleed attack takes advantage of the fact that the server can be too trusting. 
+              -  When someone tells it that the message has 6 characters, the server automatically sends back 6 characters in response. 
+              -  A malicious user can take take advantage of the server's gullibility : 
+
+                - the word "banana" isn't 100 characters long. 
+                - But the server doesn't bother to check before sending back its response, so it sends back 100 characters. 
+                - Specifically, it sends back the 7-character word "banana" 
+                      !!!! followed by whichever 93 characters happen to be stored after the word "banana" in the server's memory. !!!
+                - Computers often store information in a haphazard order in an effort to
+                     pack it into its memory as tightly as possible, so there's no telling what information might be returned. 
+                - In this case, the bit of memory after the word "banana" contained sensitive personal information belonging to user John Smith.
+                - This data is random; could include usernames, passwords, private keys, cookies; very easy to pull off
                 
-                The server is simply supposed to acknowledge having received the request and parrot back the message : 
-                
-                    -  The Heartbleed attack takes advantage of the fact that the server can be too trusting. 
-                    -  When someone tells it that the message has 6 characters, the server automatically sends back 6 characters in response. 
-                    -  A malicious user can take take advantage of the server's gullibility : 
-                    
-                            - the word "banana" isn't 100 characters long. 
-                            - But the server doesn't bother to check before sending back its response, so it sends back 100 characters. 
-                            - Specifically, it sends back the 7-character word "banana" 
-                                  - followed by whichever 93 characters happen to be stored after the word "banana" in the server's memory. 
-                            - Computers often store information in a haphazard order in an effort to pack it into its memory as tightly as possible, so there's no telling what information might be returned. 
-                            - In this case, the bit of memory after the word "banana" contained sensitive personal information belonging to user John Smith.
-                            - This data is random; could include usernames, passwords, private keys, cookies; very easy to pull off
   - nmap -d --script ssl-heartbleed --script-args vulns.showall -sV [host]
   - Vulnerable versions include Open SSL 1.0.1 and 1.0.1f
   - CVE-2014-0160
