@@ -225,7 +225,15 @@
       - affects SSL and TLS services
       - Allows attackers to break the encryption and steal sensitive data
       - Uses flaws in SSL v2
-      - Not only web servers; can be IMAP and POP servers as well
+      - 
+      - cross-protocol security bug that attacks servers supporting modern SSLv3/TLS protocol suites 
+      - use their support for the obsolete, insecure, SSL v2 protocol to leverage an attack on connections using up-to-date protocols that would otherwise be secure. 
+      
+      - can affect all types of servers that offer services encrypted with SSLv3/TLS  & yet still support SSLv2, 
+        provided they share the same public key credentials between the two protocols.
+       
+      -  Additionally, if the same public key certificate is used on a different server that supports SSLv2, 
+            => the TLS server is also vulnerable due to the SSLv2 server leaking key information that can be used against the TLS server.
 
 ### <u>Cryptography Attacks</u>
 
@@ -246,14 +254,15 @@
 - **Chosen plain-text attack** 
    
    - plain-text :           available
-   - encryption process  :  available (black box : attacker can only view input (his chosen plaintext) and output (correspondant ciphertext) )
+   - encryption process  :  available (but like a **black box** : attacker can only view input (his chosen plaintext) and output (correspondant ciphertext) )
    - cipher-text :          available after encryption process
    - secret key :           Not Known 
    
    - goal :                 reveal all or a part of the secret encryption key
       
-          - Attacker can encrypt the plaintext himself (unlike know-plain-text attack) :
-                - formalized by allowing the adversary to interact with an encryption oracle, viewed as a black box.(encryption process)
+          - Attacker can encrypt the plaintext himself (unlike know-plain-text attack where he has only input & output information provided) :
+                - formalized by allowing the attacker to interact with an encryption oracle, viewed as a black box.(encryption process)
+          
           - In **public key cryptography** ,   encryption key is public => so attackers can encrypt any plaintext they choose.
           - attacker encrypts multiple plain-text copies in order to gain the key.
           - attacker can obtain the ciphertexts for arbitrary plaintexts => he can encrypts them himself
@@ -262,7 +271,7 @@
 
 - **Adaptive chosen plain-text attack** 
 
-    -  more detailed kind of chosen-plaintext attack
+    -  more detailed **kind** of **chosen-plaintext attack**
     -  Attacker has the capability to choose plaintext for **many times** encryption.
     -  Instead of using 1 big block of text, 
             
@@ -278,9 +287,10 @@
 
      - attacker makes a series of interactive queries choosing subsequent plaintexts based on :
             
-            information from the previous encryptions; 
+            information (obtained cipher(s)) from the previous encryption(s); 
      
      - idea is to glean more and more information about the full target cipher text and key
+     
      
 - **Cipher-text-only attack**   (also **Known Cipher-text attack**)
       
@@ -316,14 +326,14 @@
   - Some self-synchronizing **stream ciphers** have been also attacked successfully in that way.
 
 - **Replay attack**
-  - Usually performed within context of MITM attack
-  - Hacker repeats a portion of cryptographic exchange in hopes of fooling the system to setup a communications channel
+  - Usually performed within context of **MITM attack**
+  - Hacker repeats a portion of cryptographic exchange in hopes of **fooling the system to : login / setup a communications channel**
   - Doesn't know the actual data - just has to get timing right
   
 
 - **Side-Channel Attack**
-  - Monitors environmental factors such as :
-      - power consumtion, 
+  - Monitors **environmental factors** such as :
+      - power consumption, 
       - timing & delay .
 
 
