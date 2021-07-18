@@ -64,11 +64,20 @@
 
 - **Hash** - one-way mathematical function that produces a fix-length string (hash) based on the arrangement of data bits in the input
 - **Algorithms**
-  - **MD5** (Message Digest algorithm) - produces 128 bit hash expressed as 32 digit hexadecimal number; has serious flaws; still used for file download verification
-  - **SHA-1** - developed by NSA; 160 bit value output
-  - **SHA-2** - four separate hash functions; produce outputs of 224, 256, 384 and 512 bits; not widely used
+  - **MD5** (Message Digest algorithm) - produces **128 bit** hash expressed as 32 digit hexadecimal number; has serious flaws; still used for file download verification
+  - **SHA-1** - developed by NSA; **160 bit** value output
+  - **SHA-2** - four separate hash functions; produce outputs of **224, 256, 384 and 512 bits**; not widely used
   - **SHA-3** - uses sponge construction
-  - **RIPEMD-#** - works through 80 stages, executing 5 blcosk 16 times each; uses modulo 32 addition
+  - **RIPEMD-#** - RIPEMD(RACE Integrity Primitives Evaluation Message Digest) 
+                 - group of hash function w
+                 - developed to work well with 32-bit processors.
+                 - Types of RIPEMD:
+                 
+                            RIPEMD-128
+                            RIPEMD-160
+                            RIPEMD-256
+                            RIPEMD-320
+                            
 - **Collision** - occurs when two or more files create the same output
   - Can happen and can be used an attack; rare, though
 - **DHUK Attack** (Don't Use Hard-Coded Keys) - allows attackers to access keys in certain VPN implementations; affects devices using ANSI X9.31 with a hard-coded seed key
@@ -132,7 +141,7 @@
 
 ### <u>Digital Signatures</u>
 
-- When signing a message, you sign it with your **private** key and the recipient decrypts the has with their **public** key
+- When signing a message, you sign it with your **private** key and the recipient decrypts the hash with your **public** key
 - **Digital Signature Algorithm** (DSA) - used in generation and verification of digital signatures per FIPS 186-2
 
 ### <u>Full Disk Encryption</u>
@@ -145,12 +154,18 @@
 ### <u>Encrypted Communication</u>
 
 - **Often-Used Encrypted Communication Methods**
+  
   - **Secure Shell** (SSH) - secured version of telnet; uses port 22; relies on public key cryptography; SSH2 is successor and includes SFTP
+  
   - **Secure Sockets Layer** (SSL) - encrypts data at **transport layer and above**; uses **RSA** encryption and **digital certificates**; has a six-step process; largely has been replaced by TLS
+  
   - **Transport Layer Security** (TLS) - uses RSA 1024 and 2048 bits; successor to SSL; allows **both client and server to authenticate to each other**; TLS Record Protocol provides secured communication channel
+  
   - **Internet Protocol Security** (IPSEC) - **network layer** tunnelling protocol; used in tunnel and transport modes; **ESP encrypts each packet**
+  
   - **PGP** - Pretty Good Privacy; used for signing, compress and encryption of emails, files and directories; known as hybrid cryptosystem - features conventional and public key cryptography
   - **S/MIME** - standard for public key encryption and signing of MIME data; only difference between this and PGP is PGP can encrypt files and drives unles S/MIME
+
 - **Heartbleed** - attack on **OpenSSL heartbeat** which verifies data was received correctly 
   - Reminder : (OpenSSL : software that allows computers to communicate using the SSL encryption standards)
   - The SSL standard includes a "heartbeat" option : 
@@ -165,34 +180,48 @@
 
           The server is simply supposed to acknowledge having received the request and parrot back the message : 
 
-              -  The Heartbleed attack takes advantage of the fact that the server can be too trusting. 
-              -  When someone tells it that the message has 6 characters, the server automatically sends back 6 characters in response. 
-              -  A malicious user can take take advantage of the server's gullibility : 
+          -  The Heartbleed attack takes advantage of the fact that the server can be too trusting. 
+          -  When someone tells it that the message has 6 characters, the server automatically sends back 6 characters in response. 
+          -  A malicious user can take take advantage of the server's gullibility : 
 
-                - the word "banana" isn't 100 characters long. 
-                - But the server doesn't bother to check before sending back its response, so it sends back 100 characters. 
-                - Specifically, it sends back the 7-character word "banana" 
-                      !!!! followed by whichever 93 characters happen to be stored after the word "banana" in the server's memory. !!!
-                - Computers often store information in a haphazard order in an effort to
-                     pack it into its memory as tightly as possible, so there's no telling what information might be returned. 
-                - In this case, the bit of memory after the word "banana" contained sensitive personal information belonging to user John Smith.
-                - This data is random; could include usernames, passwords, private keys, cookies; very easy to pull off
+            - the word "banana" isn't 100 characters long. 
+            - But the server doesn't bother to check before sending back its response, so it sends back 100 characters. 
+            - Specifically, it sends back the 7-character word "banana" 
+                  !!!! followed by whichever 93 characters happen to be stored after the word "banana" in the server's memory.!!!
+            - Computers often store information in a haphazard order in an effort to
+                 pack it into its memory as tightly as possible, so there's no telling what information might be returned. 
+            - In this case, the bit of memory after the word "banana" contained
+                           sensitive personal information belonging to user John Smith.
+            - This data is random; could include usernames, passwords, private keys, cookies; very easy to pull off
                 
-  - nmap -d --script ssl-heartbleed --script-args vulns.showall -sV [host]
-  - Vulnerable versions include Open SSL 1.0.1 and 1.0.1f
-  - CVE-2014-0160
+      - nmap -d --script ssl-heartbleed --script-args vulns.showall -sV [host]
+      
+      - Vulnerable versions include Open SSL 1.0.1 and 1.0.1f
+      
+      - CVE-2014-0160
   
-- **FREAK** (Factoring Attack on RSA-EXPORT Keys) - **MITM** attack that forces a **downgrade** of **RSA key to a weaker length**
+- **FREAK** (Factoring Attack on RSA-EXPORT Keys) 
+      
+      - **MITM** attack 
+      - forces a **downgrade** of **RSA key to a weaker length**
 
-- **POODLE** (Paddling Oracle On Downgraded Legacy Encryption) - downgrade attack that used the vulnerability that **TLS downgrades to SSL if a connection cannot be made**
-  - **SSl v3** uses **RC4**, which is easy to crack
-  - CVE-2014-3566
-  - Also called PoodleBleed
+- **POODLE** (Paddling Oracle On Downgraded Legacy Encryption) 
+  
+      - downgrade attack that used the vulnerability that
+      
+             **TLS downgrades to SSL if a connection cannot be made**
+      
+      - **SSl v3** uses **RC4**, which is easy to crack
+      
+      - CVE-2014-3566
+      - Also called PoodleBleed
 
-- **DROWN** (Decrypting RSA with Obsolete and Weakened eNcyption) - affects SSL and TLS services
-  - Allows attackers to break the encryption and steal sensitive data
-  - Uses flaws in SSL v2
-  - Not only web servers; can be IMAP and POP servers as well
+- **DROWN** (Decrypting RSA with Obsolete and Weakened eNcyption) 
+  
+      - affects SSL and TLS services
+      - Allows attackers to break the encryption and steal sensitive data
+      - Uses flaws in SSL v2
+      - Not only web servers; can be IMAP and POP servers as well
 
 ### <u>Cryptography Attacks</u>
 
