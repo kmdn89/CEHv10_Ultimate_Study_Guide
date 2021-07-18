@@ -146,22 +146,47 @@
 
 - **Often-Used Encrypted Communication Methods**
   - **Secure Shell** (SSH) - secured version of telnet; uses port 22; relies on public key cryptography; SSH2 is successor and includes SFTP
-  - **Secure Sockets Layer** (SSL) - encrypts data at transport layer and above; uses RSA encryption and digital certificates; has a six-step process; largely has been replaced by TLS
-  - **Transport Layer Security** (TLS) - uses RSA 1024 and 2048 bits; successor to SSL; allows both client and server to authenticate to each other; TLS Record Protocol provides secured communication channel
-  - **Internet Protocol Security** (IPSEC) - network layer tunnelling protocol; used in tunnel and transport modes; ESP encrypts each packet
+  - **Secure Sockets Layer** (SSL) - encrypts data at **transport layer and above**; uses **RSA** encryption and **digital certificates**; has a six-step process; largely has been replaced by TLS
+  - **Transport Layer Security** (TLS) - uses RSA 1024 and 2048 bits; successor to SSL; allows **both client and server to authenticate to each other**; TLS Record Protocol provides secured communication channel
+  - **Internet Protocol Security** (IPSEC) - **network layer** tunnelling protocol; used in tunnel and transport modes; **ESP encrypts each packet**
   - **PGP** - Pretty Good Privacy; used for signing, compress and encryption of emails, files and directories; known as hybrid cryptosystem - features conventional and public key cryptography
   - **S/MIME** - standard for public key encryption and signing of MIME data; only difference between this and PGP is PGP can encrypt files and drives unles S/MIME
-- **Heartbleed** - attack on OpenSSL heartbeat which verifies data was received correctly
-  - Vulnerability is that a single byte of data gets 64kb from the server
-  - This data is random; could include usernames, passwords, private keys, cookies; very easy to pull off
+- **Heartbleed** - attack on **OpenSSL heartbeat** which verifies data was received correctly 
+  - Reminder : (OpenSSL : software that allows computers to communicate using the SSL encryption standards)
+  - The SSL standard includes a "heartbeat" option : 
+        -   provides a way for a computer at one end of the SSL connection to double-check that there's still someone at the other end of the line. 
+        -   This feature is useful because some internet routers will drop a connection if it's idle for too long. 
+        -   In a nutshell, the heartbeat protocol works like this:
+              
+                The heartbeat message has three parts: 
+                    1- a request for acknowledgement, 
+                    2- a short, randomly-chosen message (in this case, "banana"), 
+                    3- and the number of characters in that message. 
+                
+                The server is simply supposed to acknowledge having received the request and parrot back the message : 
+                
+                    -  The Heartbleed attack takes advantage of the fact that the server can be too trusting. 
+                    -  When someone tells it that the message has 6 characters, the server automatically sends back 6 characters in response. 
+                    -  A malicious user can take take advantage of the server's gullibility : 
+                    
+                            - the word "banana" isn't 100 characters long. 
+                            - But the server doesn't bother to check before sending back its response, so it sends back 100 characters. 
+                            - Specifically, it sends back the 7-character word "banana" 
+                                  - followed by whichever 93 characters happen to be stored after the word "banana" in the server's memory. 
+                            - Computers often store information in a haphazard order in an effort to pack it into its memory as tightly as possible, so there's no telling what information might be returned. 
+                            - In this case, the bit of memory after the word "banana" contained sensitive personal information belonging to user John Smith.
+                            - This data is random; could include usernames, passwords, private keys, cookies; very easy to pull off
   - nmap -d --script ssl-heartbleed --script-args vulns.showall -sV [host]
   - Vulnerable versions include Open SSL 1.0.1 and 1.0.1f
   - CVE-2014-0160
-- **FREAK** (Factoring Attack on RSA-EXPORT Keys) - man-in-the-middle attack that forces a downgrade of RSA key to a weaker length
-- **POODLE** (Paddling Oracle On Downgraded Legacy Encryption) - downgrade attack that used the vulnerability that TLS downgrades to SSL if a connection cannot be made
-  - SSl 3 uses RC4, which is easy to crack
+  
+- **FREAK** (Factoring Attack on RSA-EXPORT Keys) - **MITM** attack that forces a **downgrade** of **RSA key to a weaker length**
+
+- **POODLE** (Paddling Oracle On Downgraded Legacy Encryption) - downgrade attack that used the vulnerability that **TLS downgrades to SSL if a connection cannot be made**
+  - **SSl v3** uses **RC4**, which is easy to crack
   - CVE-2014-3566
   - Also called PoodleBleed
+
 - **DROWN** (Decrypting RSA with Obsolete and Weakened eNcyption) - affects SSL and TLS services
   - Allows attackers to break the encryption and steal sensitive data
   - Uses flaws in SSL v2
