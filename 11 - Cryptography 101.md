@@ -44,7 +44,11 @@
   - **IDEA** (International Data Encryption Algorithm) - block cipher; 128 bit key; originally used in PGP 2.0
   - **Twofish** - block cipher; up to 256 bit key
   - **Blowfish** - fast block cipher; replaced by AES; 64 bit block size; 32 to 448 bit key; considered public domain
-  - **RC** (Rivest Cipher) - RC2 to RC6; block cipher; bariable key length up to 2040 bits; RC6 (lastest version) uses 128 bit blocks and 4 bit working registers; RC5 uses variable block sizes and 2 bit working registers
+  - **RC** (Rivest Cipher) 
+      - RC2 to RC6; 
+        variable key length up to 2040 bits; 
+        RC6 (lastest version) uses 128 bit blocks and 4 bit working registers; 
+        RC5 uses variable block sizes and 2 bit working registers
 
 ### <u>Asymmetric Encryption</u>
 
