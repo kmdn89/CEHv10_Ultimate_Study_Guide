@@ -257,7 +257,8 @@
    - encryption process  :  available (but like a **black box** : attacker can only view input (his chosen plaintext) and output (correspondant ciphertext) )
    - cipher-text :          available after encryption process
    - secret key :           Not Known 
-   
+   - efficient against :    Public Key Cryptography
+ 
    - goal :                 reveal all or a part of the secret encryption key
       
           - Attacker can encrypt the plaintext himself (unlike know-plain-text attack where he has only input & output information provided) :
